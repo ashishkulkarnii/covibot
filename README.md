@@ -23,3 +23,5 @@ user_agent=
 Here, user agent can be any name.
 
 Once you've got this in place, you're ready to go!
+
+*covibot is designed to run in r/SpaceJam2021, a subreddit I created for testing covibot. By changing the line ```subreddit = r.subreddit("SpaceJam2021")```, the bot can be deployed pretty much anywhere.
