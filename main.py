@@ -24,6 +24,7 @@ world_covid_stats = json.loads(urlResponse.read().decode(encoding))
 
 
 def coviComment(x):
+	x.lower()
 	x = x.split()
 	for i in world_covid_stats:
 		if i["country"] in x:
