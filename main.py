@@ -1,0 +1,57 @@
+import praw
+import pdb
+import re
+import os
+import json
+from six.moves.urllib.request import urlopen
+
+
+r = praw.Reddit('bot1')
+
+
+DEFAULT_ENCODING = 'utf-8'
+
+url1 = 'https://api.apify.com/v2/key-value-stores/tVaYRsPHLjNdNBu7S/records/LATEST?disableRedirect=true'
+urlResponse = urlopen(url1)
+if hasattr(urlResponse.headers, 'get_content_charset'):
+    encoding = urlResponse.headers.get_content_charset(DEFAULT_ENCODING)
+else:
+    encoding = urlResponse.headers.getparam('charset') or DEFAULT_ENCODING
+world_covid_stats = json.loads(urlResponse.read().decode(encoding))
+
+#created a list of dictionaries of world COVID-19 stats, gets data from respective government APIs. eg: India - https://www.mohfw.gov.in/
+#all the datasets used are regularly updated
+
+
+def coviComment(x):
+	x = x.split()
+	for i in world_covid_stats:
+		if i["country"] in x:
+			all_time = i["infected"]
+			if all_time == "NA":
+				all_time = 0
+			else:
+				all_time = int(all_time)
+			recovered = i["recovered"]
+			if recovered == "NA":
+				recovered = 0
+			else:
+				recovered = int(recovered)
+			dead = i["deceased"]
+			if dead == "NA":
+				dead = 0
+			else:
+				dead = int(dead)
+			current_cases = all_time - recovered - dead
+			return [i["country"], str(current_cases)]
+	return None
+
+#coviComment returns the active COVID-19 cases of a mentioned country by searching through the .json dataset of countries for the country mentioned in the Reddit post title, and subtracting the number of recovered and deceased cases from the total number of cases. 
+
+subreddit = r.subreddit("SpaceJam2021")
+for submission in subreddit.new(limit=1):
+	if re.search("going", submission.title, re.IGNORECASE):
+		c = coviComment(submission.title)
+		if c != None:
+			submission.reply("{} has {} current cases, be careful!".format(*c))
+			print("Bot replying to : ", submission.title)
