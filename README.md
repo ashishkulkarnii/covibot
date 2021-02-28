@@ -1,7 +1,7 @@
 # covibot
 A Reddit bot which gives COVID-19 stats of a specific region to Redditors based on their post title. 
 
-A SpaceJam 2021 project.
+A SpaceJam 2021 project. Won 2nd place, Freshers' Track.
 
 To get it up and running, add the PRAW library to Python (3.6+), using ```pip install praw```.
 
