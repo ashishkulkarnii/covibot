@@ -63,10 +63,19 @@ def coviComment(x):
 
 response_formats = ['{} has {} current cases, be careful!', '{} has {} infected people, stay safe!', '{} currently has {} active patients, keep your mask on!', '{} has {} COVID-19 patients presently, don\'t forget to keep sanitizer handy!']
 
+f = open('IDs-responded-to.txt', 'a') #creating a text file, in case it does not already exist
+f = open('IDs-responded-to.txt', 'r+') #opening the text file in read mode, with the handle at the top of the page
+IDs = f.readlines()
+
 subreddit = r.subreddit("SpaceJam2021")
-for submission in subreddit.new(limit=1): #limit=1 indicates the bot sees only one post at a time, and .new indicates the bot sees the posts in chronological order. These valuse can be changed based on requirement.
-	if re.search("going", submission.title, re.IGNORECASE) or re.search("trip", submission.title, re.IGNORECASE) or re.search("visit", submission.title, re.IGNORECASE) or re.search("visiting", submission.title, re.IGNORECASE) or re.search("in", submission.title, re.IGNORECASE) or re.search("at", submission.title, re.IGNORECASE) or re.search("go", submission.title, re.IGNORECASE):
-		c = coviComment(submission.title)
-		if c != None:
-			submission.reply(random.choice(response_formats).format(*c))
-			print("Bot replying to : ", submission.title)
+for submission in subreddit.new(limit=5): #limit=5 indicates the bot sees only one post at a time, and .new indicates the bot sees the posts in chronological order. These valuse can be changed based on requirement.
+	if str(submission.id) + '\n' not in IDs: #this is to make sure a post is replied to only once
+		if re.search("going", submission.title, re.IGNORECASE) or re.search("trip", submission.title, re.IGNORECASE) or re.search("visit", submission.title, re.IGNORECASE) or re.search("visiting", submission.title, re.IGNORECASE) or re.search("in", submission.title, re.IGNORECASE) or re.search("at", submission.title, re.IGNORECASE) or re.search("go", submission.title, re.IGNORECASE):
+			c = coviComment(submission.title)
+			if c != None:
+				submission.reply(random.choice(response_formats).format(*c))
+				print("Bot replying to : ", submission.title)
+				f.write(submission.id + '\n')
+				IDs = f.readlines()
+
+f.close()
