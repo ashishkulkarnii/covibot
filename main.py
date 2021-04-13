@@ -1,6 +1,6 @@
 #covibot
 
-
+import random 
 import praw
 import pdb
 import re
@@ -12,7 +12,7 @@ from six.moves.urllib.request import urlopen
 r = praw.Reddit('bot1')
 
 
-def getListFromURL(url):
+def getDictFromURL(url):
 	DEFAULT_ENCODING = 'utf-8'
 	urlResponse = urlopen(url)
 	if hasattr(urlResponse.headers, 'get_content_charset'):
@@ -23,13 +23,12 @@ def getListFromURL(url):
 	return result
 
 url1 = 'https://api.apify.com/v2/key-value-stores/tVaYRsPHLjNdNBu7S/records/LATEST?disableRedirect=true'
-world_covid_stats = getListFromURL(url1)
+world_covid_stats = getDictFromURL(url1)
 
 url2 = 'https://api.apify.com/v2/key-value-stores/toDWvRj1JpTXiM8FF/records/LATEST?disableRedirect=true'
-state_stats = getListFromURL(url2)["regionData"]
+state_stats = getDictFromURL(url2)["regionData"]
 
-#created a list of dictionaries of world COVID-19 stats, gets data from respective government APIs. eg: India - https://www.mohfw.gov.in/
-#all the datasets used are regularly updated
+#created a list of dictionaries of world COVID-19 stats, gets data from respective government APIs. eg: India - https://www.mohfw.gov.in/, all the datasets used are regularly updated
 
 
 def coviComment(x):
@@ -61,14 +60,13 @@ def coviComment(x):
 
 #coviComment returns the active COVID-19 cases of a mentioned country by searching through the .json dataset of countries for the country mentioned in the Reddit post title, and subtracting the number of recovered and deceased cases from the total number of cases. 
 
+
+response_formats = ['{} has {} current cases, be careful!', '{} has {} infected people, stay safe!', '{} currently has {} active patients, keep your mask on!', '{} has {} COVID-19 patients presently, don\'t forget to keep sanitizer handy!']
+
 subreddit = r.subreddit("SpaceJam2021")
 for submission in subreddit.new(limit=1): #limit=1 indicates the bot sees only one post at a time, and .new indicates the bot sees the posts in chronological order. These valuse can be changed based on requirement.
 	if re.search("going", submission.title, re.IGNORECASE) or re.search("trip", submission.title, re.IGNORECASE) or re.search("visit", submission.title, re.IGNORECASE) or re.search("visiting", submission.title, re.IGNORECASE) or re.search("in", submission.title, re.IGNORECASE) or re.search("at", submission.title, re.IGNORECASE) or re.search("go", submission.title, re.IGNORECASE):
 		c = coviComment(submission.title)
 		if c != None:
-			submission.reply("{} has {} current cases, be careful!".format(*c))
+			submission.reply(random.choice(response_formats).format(*c))
 			print("Bot replying to : ", submission.title)
-	
-
-
-
