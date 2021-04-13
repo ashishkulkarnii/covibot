@@ -64,7 +64,7 @@ def coviComment(x):
 response_formats = ['{} has {} current cases, be careful!', '{} has {} infected people, stay safe!', '{} currently has {} active patients, keep your mask on!', '{} has {} COVID-19 patients presently, don\'t forget to keep sanitizer handy!']
 
 f = open('IDs-responded-to.txt', 'a') #creating a text file, in case it does not already exist
-f = open('IDs-responded-to.txt', 'r+') #opening the text file in read mode, with the handle at the top of the page
+f = open('IDs-responded-to.txt', 'r+') #opening the text file in read-and-write mode, with the handle at the top of the page
 IDs = f.readlines()
 
 subreddit = r.subreddit("SpaceJam2021")
