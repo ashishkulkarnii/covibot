@@ -12,24 +12,21 @@ from six.moves.urllib.request import urlopen
 r = praw.Reddit('bot1')
 
 
-DEFAULT_ENCODING = 'utf-8'
+def getListFromURL(url):
+	DEFAULT_ENCODING = 'utf-8'
+	urlResponse = urlopen(url)
+	if hasattr(urlResponse.headers, 'get_content_charset'):
+	    encoding = urlResponse.headers.get_content_charset(DEFAULT_ENCODING)
+	else:
+	    encoding = urlResponse.headers.getparam('charset') or DEFAULT_ENCODING
+	result = json.loads(urlResponse.read().decode(encoding))
+	return result
 
 url1 = 'https://api.apify.com/v2/key-value-stores/tVaYRsPHLjNdNBu7S/records/LATEST?disableRedirect=true'
-urlResponse = urlopen(url1)
-if hasattr(urlResponse.headers, 'get_content_charset'):
-    encoding = urlResponse.headers.get_content_charset(DEFAULT_ENCODING)
-else:
-    encoding = urlResponse.headers.getparam('charset') or DEFAULT_ENCODING
-world_covid_stats = json.loads(urlResponse.read().decode(encoding))
+world_covid_stats = getListFromURL(url1)
 
 url2 = 'https://api.apify.com/v2/key-value-stores/toDWvRj1JpTXiM8FF/records/LATEST?disableRedirect=true'
-urlResponse = urlopen(url2)
-if hasattr(urlResponse.headers, 'get_content_charset'):
-    encoding = urlResponse.headers.get_content_charset(DEFAULT_ENCODING)
-else:
-    encoding = urlResponse.headers.getparam('charset') or DEFAULT_ENCODING
-india_covid_stats = json.loads(urlResponse.read().decode(encoding))
-state_stats = india_covid_stats["regionData"]
+state_stats = getListFromURL(url2)["regionData"]
 
 #created a list of dictionaries of world COVID-19 stats, gets data from respective government APIs. eg: India - https://www.mohfw.gov.in/
 #all the datasets used are regularly updated
