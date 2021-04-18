@@ -37,4 +37,4 @@ PPT: https://docs.google.com/presentation/d/15PUDgeP8JoicsmX3rf_dg8xgRDyMsBSlQQb
 Our submission on Devfolio: https://devfolio.co/submissions/covibot-cf95
 
 
-UPDATE: covibot-24-7.py is essentially the same bot, but now can run continuosly. 
+UPDATE: covibot-24-7.py is essentially the same bot, but now can run continuously. 
