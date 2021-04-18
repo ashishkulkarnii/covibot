@@ -125,7 +125,7 @@ while True: #program runs constantly. if you don't want a progress bar, you can 
             if re.search("going", submission.title, re.IGNORECASE) or re.search("trip", submission.title, re.IGNORECASE) or re.search("visit", submission.title, re.IGNORECASE) or re.search("visiting", submission.title, re.IGNORECASE) or re.search("in", submission.title, re.IGNORECASE) or re.search("at", submission.title, re.IGNORECASE) or re.search("go", submission.title, re.IGNORECASE) or re.search("heading", submission.title, re.IGNORECASE) or re.search("headed", submission.title, re.IGNORECASE):
                 c = coviComment(submission.title)
                 if c != None:
-                    submission.reply(random.choice(response_formats).format(*c) + "\n\n\n\n---\n\n^(Beep boop. I am a bot.)\n^(Want to see what I'm made of? Check out: ) [^GitHub ](https://github.com/ashishkulkarnii/covibot/covibot-24-7.py)")
+                    submission.reply(random.choice(response_formats).format(*c) + "\n\n\n\n---\n\n^(Beep boop. I am a bot.)\n^(Want to see what I'm made of? Check out: ) [^GitHub ](https://github.com/ashishkulkarnii/covibot/blob/main/covibot-24-7.py)")
                     print("Bot replying to : ", submission.title)
                     f.write(submission.id + '\n')
                 c = None
