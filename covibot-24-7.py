@@ -1,7 +1,6 @@
 from time import sleep
 import random 
 import praw
-from os import system, name 
 import re
 import os
 import json
@@ -91,8 +90,8 @@ def barOfProgress(number_of_seconds):
 
 
 def clear(): 
-    if name == 'nt': 
-        _ = system('cls') 
+    if os.name == 'nt': 
+        _ = os.system('cls') 
 
 #to clear console screen, not necessary
 
