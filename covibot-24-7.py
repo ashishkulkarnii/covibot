@@ -107,6 +107,7 @@ clear()
 count_iter = 1
 
 while True: #program runs constantly. if you don't want a progress bar, you can replace 'True' with 'not sleep(60)' and remove L137, since sleep method always returns None
+    
     f = open('IDs-responded-to.txt', 'r+') #opening the text file in read-and-write mode, with the handle at the top of the page
     IDs = f.readlines()
     
@@ -119,7 +120,7 @@ while True: #program runs constantly. if you don't want a progress bar, you can 
     #created a list of dictionaries of world COVID-19 stats, gets data from respective government APIs. eg: India - https://www.mohfw.gov.in/, all the datasets used are regularly updated
 
     subreddit = r.subreddit("SpaceJam2021")
-    for submission in subreddit.new(limit=None): #limit=5 indicates the bot sees only one post at a time, and .new indicates the bot sees the posts in chronological order. These valuse can be changed based on requirement.
+    for submission in subreddit.new(limit=None): #limit=None indicates the bot sees all the posts in the subreddit, and .new indicates the bot sees the posts in chronological order. These valuse can be changed based on requirement.
         if str(submission.id) + '\n' not in IDs: #this is to make sure a post is replied to only once
             if re.search("going", submission.title, re.IGNORECASE) or re.search("trip", submission.title, re.IGNORECASE) or re.search("visit", submission.title, re.IGNORECASE) or re.search("visiting", submission.title, re.IGNORECASE) or re.search("in", submission.title, re.IGNORECASE) or re.search("at", submission.title, re.IGNORECASE) or re.search("go", submission.title, re.IGNORECASE) or re.search("heading", submission.title, re.IGNORECASE) or re.search("headed", submission.title, re.IGNORECASE):
                 c = coviComment(submission.title)
