@@ -28,6 +28,8 @@ Note: covibot is designed to run in r/SpaceJam2021, a subreddit I created for te
 By changing the line ```subreddit = r.subreddit("SpaceJam2021")```, the bot can be deployed pretty much anywhere.
 
 
+To learn, in detail, the process I used to create covibot, read my [three part guide](https://medium.com/analytics-vidhya/a-comprehensive-guide-to-creating-a-basic-reddit-bot-part-1-15fb0e4cebcb) on Medium. 
+
 For reference, check out our subreddit: https://www.reddit.com/r/SpaceJam2021/
 
 For a quick demo, check out my YouTube video: https://www.youtube.com/watch?v=AqTPwbqeNeU
