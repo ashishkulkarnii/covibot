@@ -21,12 +21,11 @@ By changing the line ```subreddit = r.subreddit("SpaceJam2021")```, the bot can 
 
 To learn, in detail, the process I used to create covibot, read my [three part guide](https://medium.com/analytics-vidhya/a-comprehensive-guide-to-creating-a-basic-reddit-bot-part-1-15fb0e4cebcb) on Medium. 
 
-For reference, check out our subreddit: https://www.reddit.com/r/SpaceJam2021/
+Resources:
+- The subreddit where I tested my bot: [r/SpaceJam2021](https://www.reddit.com/r/SpaceJam2021/). You will also find bots developed by people who read my Medium article on this subreddit!
+- [This YouTube video](https://www.youtube.com/watch?v=AqTPwbqeNeU) is a quick demo that we sent alog with our hackathon submission.
+- [This](https://docs.google.com/presentation/d/15PUDgeP8JoicsmX3rf_dg8xgRDyMsBSlQQbA5nvFyoU) is the slide deck we used during our hackathon demonstration.
+- [This](https://devfolio.co/submissions/covibot-cf95) is our Devfolio submission.
 
-For a quick demo, check out my YouTube video: https://www.youtube.com/watch?v=AqTPwbqeNeU
-
-PPT: https://docs.google.com/presentation/d/15PUDgeP8JoicsmX3rf_dg8xgRDyMsBSlQQbA5nvFyoU/edit?usp=sharing
-
-Our submission on Devfolio: https://devfolio.co/submissions/covibot-cf95
-
-UPDATE: covibot-24-7.py is essentially the same bot, but now can run continuously. 
+Updates:
+- covibot-24-7.py is essentially the same bot, but now can run continuously.
